@@ -1,3 +1,4 @@
+
 #!/usr/bin/python
 # Copyright (c) 2014 Adafruit Industries
 # Author: Tony DiCola
@@ -20,9 +21,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 import sys
+import time
 
 import Adafruit_DHT
-
 
 # Parse command line parameters.
 sensor_args = { '11': Adafruit_DHT.DHT11,
@@ -47,8 +48,12 @@ humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 # the results will be null (because Linux can't
 # guarantee the timing of calls to read the sensor).
 # If this happens try again!
-if humidity is not None and temperature is not None:
-    print('Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temperature, humidity))
-else:
-    print('Failed to get reading. Try again!')
-    sys.exit(1)
+# every 1s
+while True:
+	humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+	if humidity is not None and temperature is not None:
+		print('Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temperature, humidity))
+	else:
+		print('Failed to get reading. Try again!')
+		sys.exit(1)
+	time.sleep(1)
