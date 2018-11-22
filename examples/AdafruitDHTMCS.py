@@ -22,7 +22,6 @@
 # SOFTWARE.
 import sys
 import time
-
 import Adafruit_DHT
 import http.client, urllib
 import json
@@ -52,7 +51,7 @@ humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 # If this happens try again!
 # every 1s
 
-deviceId = "D0Jq0st"
+deviceId = "D0Jq0stY"
 deviceKey = "YOSzgp3COFwm96BC" 
 def post_to_mcs(payload): 
 	headers = {"Content-type": "application/json", "deviceKey": deviceKey} 
